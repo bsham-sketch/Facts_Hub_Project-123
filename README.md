@@ -268,6 +268,4 @@ This project provided valuable hands-on experience with modern web development p
 
 This exercise demonstrated the complete web development lifecycle from concept to deployment-ready application, providing a solid foundation for more complex full-stack projects.
 
-## License
 
-This project is open source and available under the MIT License.
