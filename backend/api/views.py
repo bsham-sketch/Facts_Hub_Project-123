@@ -12,6 +12,22 @@ def get_next_id():
     next_id += 1
     return current_id
 
+def facts_list(request):
+    """Simple facts list view"""
+    data = [
+        {
+            "id": 1,
+            "title": "The human brain generates enough electricity to power a small bulb.",
+            "category": "Science",
+        },
+        {
+            "id": 2,
+            "title": "Honey never spoils and can last thousands of years.",
+            "category": "Food",
+        },
+    ]
+    return JsonResponse(data, safe=False)
+
 class CategoriesView(View):
     """Get all available categories"""
     def get(self, request):
