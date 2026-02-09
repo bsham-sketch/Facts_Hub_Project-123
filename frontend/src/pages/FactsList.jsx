@@ -7,23 +7,34 @@ import FactCard from '../components/FactCard'
 const FactsList = () => {
   const { category } = useParams()
   const [facts, setFacts] = useState([])
-  const [allFacts, setAllFacts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchFacts = async () => {
       try {
-        const res = await api.get("/api/facts/");
-        setFacts(res.data.facts);
+        setLoading(true);
+        setError(null);
+        
+        if (category) {
+          // Fetch facts by category
+          const res = await api.get(`/api/facts/category/${category}/`);
+          setFacts(res.data.facts);
+        } else {
+          // Fetch all facts
+          const res = await api.get("/api/facts/");
+          setFacts(res.data.facts);
+        }
       } catch (err) {
         console.error(err);
-        setError(true);
+        setError(err.message || 'Failed to load facts');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchFacts();
-  }, []);
+  }, [category]);
 
   const handleDeleteFact = async (factId) => {
     if (!window.confirm('Are you sure you want to delete this fact?')) {
@@ -31,9 +42,8 @@ const FactsList = () => {
     }
 
     try {
-      await api.delete(`/facts/${factId}/`)
+      await api.delete(`/api/facts/${factId}/`)
       setFacts(prevFacts => prevFacts.filter(fact => fact.id !== factId))
-      setAllFacts(prevFacts => prevFacts.filter(fact => fact.id !== factId))
     } catch (err) {
       alert('Failed to delete fact. Please try again.')
       console.error('Error deleting fact:', err)
