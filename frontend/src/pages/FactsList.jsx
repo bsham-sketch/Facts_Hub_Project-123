@@ -12,34 +12,17 @@ const FactsList = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchFacts = async () => {
       try {
-        setLoading(true)
-        setError(null)
-        
-        const factsResponse = await api.get('/api/facts/')
-        const allFactsData = factsResponse.data.facts
-        
-        setAllFacts(allFactsData)
-        
-        if (category) {
-          const filteredFacts = allFactsData.filter(fact => 
-            fact.category.toLowerCase() === category.toLowerCase()
-          )
-          setFacts(filteredFacts)
-        } else {
-          setFacts(allFactsData)
-        }
-      } catch (err) {
-        setError('Failed to load facts. Please try again later.')
-        console.error('Error fetching facts:', err)
-      } finally {
-        setLoading(false)
+        const response = await api.get("/api/facts/");
+        setFacts(response.data);
+      } catch (error) {
+        console.error("API ERROR:", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [category])
+    fetchFacts();
+  }, []);
 
   const handleDeleteFact = async (factId) => {
     if (!window.confirm('Are you sure you want to delete this fact?')) {

@@ -11,26 +11,17 @@ const Home = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchFacts = async () => {
       try {
-        setLoading(true)
-        const [factsResponse, categoriesResponse] = await Promise.all([
-          api.get('/facts/'),
-          api.get('/categories/')
-        ])
-        
-        setFacts(factsResponse.data.facts)
-        setCategories(categoriesResponse.data.categories)
-      } catch (err) {
-        setError('Failed to load data. Please try again later.')
-        console.error('Error fetching data:', err)
-      } finally {
-        setLoading(false)
+        const response = await api.get("/api/facts/");
+        setFacts(response.data);
+      } catch (error) {
+        console.error("API ERROR:", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchFacts();
+  }, []);
 
   const handleDeleteFact = async (factId) => {
     if (!window.confirm('Are you sure you want to delete this fact?')) {
