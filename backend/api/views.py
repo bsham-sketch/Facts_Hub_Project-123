@@ -28,6 +28,17 @@ def facts_list(request):
     ]
     return JsonResponse(data, safe=False)
 
+def categories_list(request):
+    """Simple categories list view"""
+    categories = [
+        "Science",
+        "Industry", 
+        "Health",
+        "Food",
+        "Technology"
+    ]
+    return JsonResponse({"categories": categories})
+
 class CategoriesView(View):
     """Get all available categories"""
     def get(self, request):

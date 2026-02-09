@@ -11,6 +11,20 @@ const Home = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await api.get("/api/categories/");
+        setCategories(res.data.categories);
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
     const fetchFacts = async () => {
       try {
         const res = await api.get("/api/facts/");
