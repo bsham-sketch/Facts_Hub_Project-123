@@ -14,7 +14,7 @@ def get_next_id():
 
 def facts_list(request):
     """Simple facts list view"""
-    data = [
+    facts = [
         {
             "id": 1,
             "title": "The human brain generates enough electricity to power a small bulb.",
@@ -26,7 +26,7 @@ def facts_list(request):
             "category": "Food",
         },
     ]
-    return JsonResponse(data, safe=False)
+    return JsonResponse({"facts": facts})
 
 def categories_list(request):
     """Simple categories list view"""
