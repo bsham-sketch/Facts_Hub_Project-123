@@ -14,9 +14,10 @@ const Home = () => {
     const fetchFacts = async () => {
       try {
         const res = await api.get("/api/facts/");
-        setFacts(res.data);
+        setFacts(res.data.facts);
       } catch (err) {
-        console.error("Failed to fetch facts:", err);
+        console.error(err);
+        setError(true);
       }
     };
 
