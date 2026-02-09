@@ -14,8 +14,8 @@ const Categories = () => {
       try {
         setLoading(true)
         const [categoriesResponse, factsResponse] = await Promise.all([
-          api.get('/categories/'),
-          api.get('/facts/')
+          api.get('/api/categories/'),
+          api.get('/api/facts/')
         ])
         
         setCategories(categoriesResponse.data.categories)
