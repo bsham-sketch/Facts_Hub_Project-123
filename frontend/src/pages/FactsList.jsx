@@ -17,7 +17,7 @@ const FactsList = () => {
         setLoading(true)
         setError(null)
         
-        const factsResponse = await api.get('/facts/')
+        const factsResponse = await api.get('/api/facts/')
         const allFactsData = factsResponse.data.facts
         
         setAllFacts(allFactsData)

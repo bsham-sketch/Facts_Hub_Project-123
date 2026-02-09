@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import api, { endpoints } from '../services/api'
+import api from '../services/api'
 import FactForm from '../components/FactForm'
 
 const AddFact = () => {
@@ -18,7 +18,7 @@ const AddFact = () => {
       setLoading(true)
       setError(null)
       
-      const response = await api.post(endpoints.factAdd, factData)
+        const response = await api.post('/api/facts/add/', factData)
       
       // Redirect to the newly created fact's detail page
       navigate(`/fact/${response.data.fact.id}`)

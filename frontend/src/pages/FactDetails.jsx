@@ -15,7 +15,7 @@ const FactDetails = () => {
         setLoading(true)
         setError(null)
         
-        const response = await api.get(`/facts/${id}/`)
+        const response = await api.get(`/api/facts/${id}/`)
         setFact(response.data.fact)
       } catch (err) {
         if (err.response?.status === 404) {
