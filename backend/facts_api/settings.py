@@ -84,6 +84,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS (React frontend)
 CORS_ALLOW_ALL_ORIGINS = True
-
-# CORS (React frontend)
-CORS_ALLOW_ALL_ORIGINS = True

@@ -17,7 +17,9 @@ const Home = () => {
         setCategories(res.data.categories);
       } catch (err) {
         console.error(err);
-        setError(true);
+        setError(err.message || 'Failed to load categories');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -31,7 +33,9 @@ const Home = () => {
         setFacts(res.data.facts);
       } catch (err) {
         console.error(err);
-        setError(true);
+        setError(err.message || 'Failed to load facts');
+      } finally {
+        setLoading(false);
       }
     };
 

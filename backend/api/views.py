@@ -13,31 +13,21 @@ def get_next_id():
     return current_id
 
 def facts_list(request):
-    """Simple facts list view"""
-    facts = [
-        {
-            "id": 1,
-            "title": "The human brain generates enough electricity to power a small bulb.",
-            "category": "Science",
-        },
-        {
-            "id": 2,
-            "title": "Honey never spoils and can last thousands of years.",
-            "category": "Food",
-        },
-    ]
-    return JsonResponse({"facts": facts})
+    """Get all facts from the data store"""
+    return JsonResponse({"facts": FACTS})
 
 def categories_list(request):
-    """Simple categories list view"""
-    categories = [
-        "Science",
-        "Industry", 
-        "Health",
-        "Food",
-        "Technology"
-    ]
-    return JsonResponse({"categories": categories})
+    """Get all categories from the data store"""
+    return JsonResponse({"categories": CATEGORIES})
+
+def facts_by_category(request, category):
+    """Get facts by category"""
+    try:
+        # Filter facts by category (case-insensitive)
+        filtered_facts = [fact for fact in FACTS if fact['category'].lower() == category.lower()]
+        return JsonResponse({"facts": filtered_facts})
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
 
 class CategoriesView(View):
     """Get all available categories"""
