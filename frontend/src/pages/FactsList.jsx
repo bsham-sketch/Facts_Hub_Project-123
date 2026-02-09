@@ -14,10 +14,10 @@ const FactsList = () => {
   useEffect(() => {
     const fetchFacts = async () => {
       try {
-        const response = await api.get("/api/facts/");
-        setFacts(response.data);
-      } catch (error) {
-        console.error("API ERROR:", error);
+        const res = await api.get("/api/facts/");
+        setFacts(res.data);
+      } catch (err) {
+        console.error("Failed to fetch facts:", err);
       }
     };
 
